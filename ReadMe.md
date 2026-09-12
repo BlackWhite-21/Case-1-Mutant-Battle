@@ -1,24 +1,33 @@
 ## Caso #1 - Mutant Battle
 
 
-
-
 ## Spec de los objetos
 
 Mutante
 * energia
-* poderMutante
 * defensa
 * ataque
-* moverse()
-* usarPoderMutante()
+* cordenadas
+* poderesMutantes
+* Metodos:
+  * moverse(Cordenada posicion)
+  * atacar(Mutante)
+  * defenderse(Mutante)
+  * usarPoderMutante()
 
 BattleField  
-* position
+* bordes
+* tamEquipo
 * mutantesA
 * mutantesB
-* crearEquipos()
-* iniciarMovimiento()
+* Metodos:
+  * crearEquipos(tamEquipo)
+  * iniciarMovimiento()
+  
+
+Cordenada
+* x
+* y
 
 
 ## Diagrama UML en PlantUML 
