@@ -4,15 +4,18 @@
 ## Spec de los objetos
 
 Mutante
-* energia
-* defensa
-* ataque
-* cordenadas
-* poderesMutantes
+* energia int
+* defensa int
+* ataque int
+* cooldown time
+* velocidad double
+* visibilidad bool
+* cordenadas Cordenada
+* poderesMutantes Vector < PoderMutante >
 * Metodos:
   * moverse(Cordenada posicion)
-  * atacar(Mutante)
-  * defenderse(Mutante)
+  * atacar(Mutante mutante)
+  * defenderse(Mutante mutante)
   * usarPoderMutante()
 
 PoderMutante
@@ -34,14 +37,14 @@ Poder
 * nombre text
 
 BattleField  
-* bordes
-* tamEquipo
-* mutantesA
-* mutantesB
+* borde Cordenada
+* tamEquipo int
+* mutantesA vector < Mutante >
+* mutantesB vector < Mutante >
 * Metodos:
   * crearEquipos(tamEquipo)
   * iniciarMovimiento()
-  
+  * verificarRadio()
 
 Cordenada
 * x
