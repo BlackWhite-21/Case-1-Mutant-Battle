@@ -19,12 +19,12 @@ Mutante
   * usarPoderMutante()
 
 PoderMutante
-* tipo text (fisico / energia)
-* duracion float
+* metodo:
+     * activarPoder(Mutante mutante)
 
 PoderDefensa
-* reduccionDano float
 * duracion float
+* reduccionDano float
 * Methods:
     * bloquear(float danoRecibido) float
 
@@ -39,10 +39,13 @@ PoderVisilidad:
 * duracion float
 * Detecccion boolean
 
-
 PoderVelocidad
 * duracion float
 * multiplicadorVelocidad float
+* 
+
+PoderCura
+* duracion float
 
 BattleField  
 * borde Cordenada
