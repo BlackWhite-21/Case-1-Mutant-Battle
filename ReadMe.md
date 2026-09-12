@@ -15,6 +15,24 @@ Mutante
   * defenderse(Mutante)
   * usarPoderMutante()
 
+PoderMutante
+* tipo text (fisico / energia)
+
+PoderDefensa
+* reduccionDano float
+* duracion float
+* Methods:
+    * bloquear(float danoRecibido) float
+
+PoderAtaque
+* danoBase float
+* alcance float
+* Methods:
+      * calcularDano() float
+
+Poder
+* nombre text
+
 BattleField  
 * bordes
 * tamEquipo
