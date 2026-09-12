@@ -20,6 +20,7 @@ Mutante
 
 PoderMutante
 * tipo text (fisico / energia)
+* duracion float
 
 PoderDefensa
 * reduccionDano float
@@ -30,11 +31,18 @@ PoderDefensa
 PoderAtaque
 * danoBase float
 * alcance float
+* duracion float
 * Methods:
       * calcularDano() float
 
-Poder
-* nombre text
+PoderVisilidad:
+* duracion float
+* Detecccion boolean
+
+
+PoderVelocidad
+* duracion float
+* multiplicadorVelocidad float
 
 BattleField  
 * borde Cordenada
