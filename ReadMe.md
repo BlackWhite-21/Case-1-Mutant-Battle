@@ -19,33 +19,37 @@ Mutante
   * usarPoderMutante()
 
 PoderMutante
-* metodo:
+* Metodos:
      * activarPoder(Mutante mutante)
 
 PoderDefensa
+* aumentoDefensa int
 * duracion float
-* reduccionDano float
-* Methods:
-    * bloquear(float danoRecibido) float
+* override: 
+    * activarPoder(Mutante mutante)
 
 PoderAtaque
-* danoBase float
-* alcance float
+* aumentoAtaque int
 * duracion float
-* Methods:
-      * calcularDano() float
+* override: 
+    * activarPoder(Mutante mutante)
 
-PoderVisilidad:
+PoderInvisilidad:
 * duracion float
-* Detecccion boolean
+* override: 
+    * activarPoder(Mutante mutante)
 
 PoderVelocidad
 * duracion float
-* multiplicadorVelocidad float
-* 
+* aumentoVelocidad float
+* override: 
+    * activarPoder(Mutante mutante)
 
 PoderCura
+* aumentoCura int
 * duracion float
+* override: 
+    * activarPoder(Mutante mutante)
 
 BattleField  
 * borde Cordenada
