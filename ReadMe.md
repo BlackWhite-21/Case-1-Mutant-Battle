@@ -1,4 +1,24 @@
-Organizacion 
-Spec de los objetos
+## Caso #1 - Mutant Battle
 
-Diagrama UML en PlantUML 
+
+
+
+## Spec de los objetos
+
+Mutante
+* energia
+* poderMutante
+* defensa
+* ataque
+* moverse()
+* usarPoderMutante()
+
+BattleField  
+* position
+* mutantesA
+* mutantesB
+* crearEquipos()
+* iniciarMovimiento()
+
+
+## Diagrama UML en PlantUML 
