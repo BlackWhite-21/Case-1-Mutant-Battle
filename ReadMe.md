@@ -69,94 +69,106 @@ Cordenada
 
 ## Diagrama UML en PlantUML 
 @startuml DiagramaMutantes
-
-skinparam classAttributeIconSize 0
-skinparam monochrome false
-skinparam shadowing false
-
 class Cordenada {
   - x : int
   - y : int
 }
+package "Model Layer" {
+  class Mutante {
+    - energia : int
+    - defensa : int
+    - ataque : int
+    - velocidad : float
+    - visibilidad : bool
+    - cordenadas : Cordenada
+    - cooldown : float
+    - poderesMutantes : Vector<PoderMutante>
+    --
+    + moverse(posicion : Cordenada) : void
+    + atacar(mutante : Mutante) : void
+    + denfender(mutante : Mutante) : void
+    + usarPoderMutante() : void
+    .. Adders ..
+    + addEnergia() : void
+    + addDefensa() : void
+    + addAtaque() : void
+    + addVelocidad() : void
+    + changeVisibilidad() : void
+  }
+  
+  interface PoderMutante {
+    + activarPoder(mutante : Mutante) : void
+  }
+  
+  class PoderDefensa {
+    {static} aumentoDefensa : int
+    {static} duracion : float
+    --
+    + activarPoder(mutante : Mutante) : void
+  }
+  
+  class PoderAtaque {
+    {static} aumentoAtaque : int
+    {static} duracion : float
+    --
+    + activarPoder(mutante : Mutante) : void
+  }
+  
+  class PoderInvisibilidad {
+    {static} duracion : float
+    --
+    + activarPoder(mutante : Mutante) : void
+  }
+  
+  class PoderVelocidad {
+    {static} aumentoVelocidad : float
+    {static} duracion : float
+    --
+    + activarPoder(mutante : Mutante) : void
+  }
+  
+  class PoderEnergia {
+    {static} aumentoEnergia : int
+    {static} duracion : float
+    --
+    + activarPoder(mutante : Mutante) : void
+  }
 
-class Mutante {
-  - energia : int
-  - defensa : int
-  - ataque : int
-  - cooldown : time
-  - velocidad : double
-  - visibilidad : bool
-  - cordenadas : Cordenada
-  - poderesMutantes : Vector<PoderMutante>
-  --
-  + moverse(posicion : Cordenada) : void
-  + atacar(mutante : Mutante) : void
-  + defenderse(mutante : Mutante) : void
-  + usarPoderMutante() : void
 }
-
-abstract class PoderMutante {
-  + {abstract} activarPoder(mutante : Mutante) : void
+package "Game Layer" {
+  class BattleField {
+    {static} borde : Cordenada
+    - tamEquipo : int
+    - mutantesA : Vector<Mutante>
+    - mutantesB : Vector<Mutante>
+    --
+    + crearEquipos(tamEquipo : int) : void
+    + iniciarMovimiento() : void
+    + verificarRadio() : void
+  }
 }
-
-class PoderDefensa {
-  - aumentoDefensa : int
-  - duracion : float
-  --
-  + activarPoder(mutante : Mutante) : void
-}
-
-class PoderAtaque {
-  - aumentoAtaque : int
-  - duracion : float
-  --
-  + activarPoder(mutante : Mutante) : void
-}
-
-class PoderInvisibilidad {
-  - duracion : float
-  --
-  + activarPoder(mutante : Mutante) : void
-}
-
-class PoderVelocidad {
-  - duracion : float
-  - aumentoVelocidad : float
-  --
-  + activarPoder(mutante : Mutante) : void
-}
-
-class PoderCura {
-  - aumentoCura : int
-  - duracion : float
-  --
-  + activarPoder(mutante : Mutante) : void
-}
-
-class BattleField {
-  - borde : Cordenada
-  - tamEquipo : int
-  - mutantesA : Vector<Mutante>
-  - mutantesB : Vector<Mutante>
-  --
-  + crearEquipos(tamEquipo : int) : void
-  + iniciarMovimiento() : void
-  + verificarRadio() : void
+package "UI Layer" {
+  class Interfase {
+    --
+    + Main(BattleField battleField) : void
+  }
+  
+  
 }
 
 ' ---- Relaciones ----
-
-PoderMutante <|-- PoderDefensa
-PoderMutante <|-- PoderAtaque
-PoderMutante <|-- PoderInvisibilidad
-PoderMutante <|-- PoderVelocidad
-PoderMutante <|-- PoderCura
+Interfase --> BattleField
+PoderMutante <|.. PoderDefensa
+PoderMutante <|.. PoderAtaque
+PoderMutante <|.. PoderInvisibilidad
+PoderMutante <|.. PoderVelocidad
+PoderMutante <|.. PoderEnergia
 
 Mutante "1" *-- "1" Cordenada : cordenadas
-Mutante "1" o-- "0..*" PoderMutante : poderesMutantes
+Mutante "5" o-- "1*" PoderMutante : poderesMutantes
 
 BattleField "1" *-- "1" Cordenada : borde
-BattleField "1" o-- "0..*" Mutante : mutantesA
-BattleField "1" o-- "0..*" Mutante : mutantesB
+BattleField "11" o-- "3" Mutante : mutantesA
+BattleField "11" o-- "3" Mutante : mutantesB
 
 @enduml
