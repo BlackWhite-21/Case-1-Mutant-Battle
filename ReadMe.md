@@ -174,8 +174,5 @@ BattleField "11" o-- "3" Mutante : mutantesB
 
 @enduml
 
-<<<<<<< HEAD
-![Diagrama UML](PlantUML.png)
-=======
 ```
->>>>>>> e16222e62ad021309153fcd1d4683890f8eeda0b
+![Diagrama UML](PlantUML.png)
