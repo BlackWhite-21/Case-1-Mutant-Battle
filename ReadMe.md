@@ -68,6 +68,7 @@ Cordenada
 
 
 ## Diagrama UML en PlantUML 
+```
 @startuml DiagramaMutantes
 class Cordenada {
   - x : int
@@ -172,3 +173,5 @@ BattleField "11" o-- "3" Mutante : mutantesA
 BattleField "11" o-- "3" Mutante : mutantesB
 
 @enduml
+
+```
