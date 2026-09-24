@@ -3,6 +3,26 @@
 
 ## Spec de los objetos
 
+## Patrón Observer
+IObserver <<interface>>
+
+* Metodos:
+  * update(Object source, Observable ob)
+
+Observable <<abstract>>
+
+* observers Vector < IObserver >
+* Metodos:
+  * addObserver(IObserver ob)
+  * removeObserver(IObserver ob)
+  * notifyObservers(Object source) → recorre la lista y llama ob.update(source, this)
+  
+## Model Layer
+
+Cordenada
+* x
+* y
+
 Mutante
 * energia int
 * defensa int
@@ -52,6 +72,17 @@ PoderCura
 * override: 
     * activarPoder(Mutante mutante)
 
+
+## Gamer Layer
+ConfiguracionBattleField (características)
+* borde Cordenada
+* tamEquipo int
+* radio double
+* Metodos:
+  * getBorde()
+  * getTamEquipo()
+  * getRadio()
+
 BattleField  
 * borde Cordenada
 * tamEquipo int
@@ -62,10 +93,51 @@ BattleField
   * iniciarMovimiento()
   * verificarRadio()
 
-Cordenada
-* x
-* y
+## Control Layer
+IObserver
 
+* battleField BattleField
+* hilosMutantes vector < MutanteThread >
+* Metodos:
+  * crearEquipos(tamEquipo)
+  * iniciarMovimiento() → crea y arranca un MutanteThread por cada mutante
+  * verificarRadio(Mutante mutante) → si un enemigo está dentro del radio, atacan o se defienden
+  * run() → ciclo principal de la batalla hasta que haya un ganador
+  detener()
+  * update(Object source, Observable ob) → cada vez que un mutante se mueve, llama verificarRadio
+
+MutanteThread extends Thread
+
+* mutante Mutante
+* activo bool
+* Metodos:
+  * run() → mientras el mutante esté vivo, se mueve y duerme el tiempo de su velocidad
+  * detener()
+
+## UI Layer (MVC)
+* Model 
+* View
+* Controller
+BattleController implements IObserver 
+* controlador ControladorBattleField
+* interfase Interfase
+* Metodos:
+  * iniciarBatalla(tamEquipo)
+  * nuevaBatalla()
+
+Interfase extends JFrame
+
+* controller BattleController
+* panel PanelBattleField
+* Metodos:
+  * Main(BattleField battleField)
+  * refrescar()
+  * mostrarGanador()
+
+PanelBattleField extends JPanel
+
+* Metodos:
+  * paintComponent(Graphics g) → dibuja los mutantes, su equipo y  su energía
 
 ## Diagrama UML en PlantUML 
 ```
