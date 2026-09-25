@@ -53,7 +53,7 @@ public class MutanteThread extends Thread {
             dirY = -dirY;
             y = Math.max(0, Math.min(y, borde.getY()));
         }
-        mutante.moverse(new Point((int) Math.round(x), (int) Math.round(y)));
+        mutante.mover(new Point((int) Math.round(x), (int) Math.round(y)));
     }
 
     public void detener() {

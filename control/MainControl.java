@@ -21,6 +21,7 @@ public class MainControl {
 
         // 2. Crear los equipos y mostrar cómo empiezan
         controlador.crearEquipos(TAM_EQUIPO_PRUEBA);
+
         System.out.println("=== Equipos iniciales ===");
         imprimirEquipo(Constantes.NOMBRE_EQUIPO_A, battleField, true);
         imprimirEquipo(Constantes.NOMBRE_EQUIPO_B, battleField, false);

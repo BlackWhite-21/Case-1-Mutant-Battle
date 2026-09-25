@@ -1,10 +1,11 @@
 package control;
 
+import java.util.Scanner;
 import java.util.Set;
 import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ThreadLocalRandom;
-import java.awt.*;
+import java.awt.Point;
 
 import game.BattleField;
 import model.Mutante;
@@ -124,7 +125,7 @@ public class ControladorBattleField implements Runnable, IObserver {
                 continue;
             }
             String par = clavePar(mutante, enemigo);
-            double distancia = mutante.getPoints().distancia(enemigo.getPoints());
+            double distancia = mutante.getPos().distance(enemigo.getPos());
 
             if (distancia <= radio) {
                 // add() es atómico: solo el primer hilo que registra el par resuelve el encuentro
@@ -138,7 +139,7 @@ public class ControladorBattleField implements Runnable, IObserver {
         }
     }
 
-    private void resolverEncuentro(Mutante a, Mutante b) {
+    private void resolverEncuentro(Mutante primero, Mutante segundo) {
         // Siempre se bloquea primero al de menor id para evitar deadlocks
         Mutante primero = a.getId() < b.getId() ? a : b;
         Mutante segundo = (primero == a) ? b : a;
@@ -163,12 +164,12 @@ public class ControladorBattleField implements Runnable, IObserver {
     }
 
     private void aplicarAtaque(Mutante atacante, Mutante objetivo, boolean objetivoDefiende) {
-        int danio = atacante.getAtaque();
+        int dAtaque = atacante.getAtaque();
         if (objetivoDefiende) {
-            danio = (int) Math.ceil((double) danio / objetivo.getDefensa());
+            dAtaque = (int) Math.ceil((double) dAtaque / objetivo.getDefensa());
         }
-        if (danio > 0) {
-            objetivo.addEnergia(-danio);
+        if (dAtaque > 0) {
+            objetivo.addEnergia(-dAtaque);
             atacante.addAtaque(Constantes.INCREMENTO_DANIO); // tope en DANIO_MAX
         }
     }
