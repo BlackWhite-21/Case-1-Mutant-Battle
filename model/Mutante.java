@@ -2,7 +2,7 @@ package model;
  
 import java.util.Vector;
 import java.awt.Point;
-
+import util.Constantes;
 import util.Observable;
 
 
@@ -30,6 +30,7 @@ public class Mutante extends Observable{
 
     public void mover(Point nPosition) {
         this.Coordenada.setLocation(nPosition);
+		notifyObservers(Constantes.EVENTO_MOVIMIENTO);
     }
 
 	public Point getPos(){
@@ -40,7 +41,11 @@ public class Mutante extends Observable{
 		if ((valor < 0) || (valor > 0 && this.energia + valor <=100)) {
 			this.energia += valor;
 		}
-    }
+		if (estabaVivo && !estaVivo()) {
+			notifyObservers(Constantes.EVENTO_MUERTE); 
+		}
+	}
+
 	public int getEnergia(){
 		return this.energia;
 	}
