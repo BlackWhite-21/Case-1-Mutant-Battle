@@ -38,13 +38,14 @@ public class Mutante extends Observable{
 	}
 
     public void addEnergia(int valor) {
-		if ((valor < 0) || (valor > 0 && this.energia + valor <=100)) {
-			this.energia += valor;
-		}
-		if (estabaVivo && !estaVivo()) {
-			notifyObservers(Constantes.EVENTO_MUERTE); 
-		}
-	}
+        boolean estabaVivo = estaVivo();   
+        if ((valor < 0) || (valor > 0 && this.energia + valor <= 100)) {
+            this.energia += valor;
+        }
+        if (estabaVivo && !estaVivo()) {
+            notifyObservers(Constantes.EVENTO_MUERTE); // avisa al BattleField
+        }
+    }
 
 	public int getEnergia(){
 		return this.energia;
