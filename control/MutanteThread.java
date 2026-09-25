@@ -1,4 +1,4 @@
-package mutantbattle.control;
+package control;
 
 import java.util.concurrent.ThreadLocalRandom;
 

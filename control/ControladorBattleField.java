@@ -1,22 +1,22 @@
-package mutantbattle.control;
+package control;
 
 import java.util.Set;
 import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ThreadLocalRandom;
 
-import mutantbattle.game.BattleField;
-import mutantbattle.model.Cordenada;
-import mutantbattle.model.Mutante;
-import mutantbattle.model.PoderAtaque;
-import mutantbattle.model.PoderCura;
-import mutantbattle.model.PoderDefensa;
-import mutantbattle.model.PoderInvisibilidad;
-import mutantbattle.model.PoderMutante;
-import mutantbattle.model.PoderVelocidad;
-import mutantbattle.observer.IObserver;
-import mutantbattle.observer.Observable;
-import mutantbattle.util.Constantes;
+import game.BattleField;
+import utils.Cordenada;
+import util.Constantes;
+import model.Mutante;
+import model.PoderAtaque;
+import model.PoderCura;
+import model.PoderDefensa;
+import model.PoderInvisibilidad;
+import model.PoderMutante;
+import model.PoderVelocidad;
+import observer.IObserver;
+import observer.Observable;
 
 /**
  * Funcionalidad del BattleField. Implementa Runnable (ciclo principal)

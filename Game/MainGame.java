@@ -1,4 +1,4 @@
-package mutantbattle.game;
+package game;
 
 import mutantbattle.model.Cordenada;
 import mutantbattle.model.Mutante;

@@ -1,4 +1,4 @@
-package mutantbattle.control;
+package control;
 
 import mutantbattle.game.BattleField;
 import mutantbattle.game.ConfiguracionBattleField;

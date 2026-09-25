@@ -1,6 +1,6 @@
 package model;
-public class PoderAtaque implements IPoderMutante{
-    public PoderAtaque(){
+public class PoderRecarga implements IPoderMutante{
+    public PoderRecarga(){
 
     }
 

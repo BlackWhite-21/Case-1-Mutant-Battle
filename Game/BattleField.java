@@ -1,12 +1,12 @@
-package mutantbattle.game;
+package game;
 
 import java.util.Vector;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import mutantbattle.model.Mutante;
-import mutantbattle.observer.IObserver;
-import mutantbattle.observer.Observable;
-import mutantbattle.util.Constantes;
+import utils.IObserver;
+import utils.Observable;
+import utils.Constantes;
 
 /**
  * Estado del BattleField: los dos equipos.
