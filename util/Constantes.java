@@ -55,6 +55,8 @@ public final class Constantes {
     public static final long REFRESCO_UI_MS = 33;   // ~30 cuadros por segundo
     public static final String TITULO_VENTANA = "Mutant Battle";
     public static final String TEXTO_BOTON_NUEVA_BATALLA = "Nueva batalla";
+    public static int TAM_FUENTE_MARCADOR;
+    public static int TAM_FUENTE_MARCADOR;
 
     private Constantes() {
         // No se instancia
