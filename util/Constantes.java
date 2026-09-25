@@ -31,12 +31,12 @@ public final class Constantes {
     public static final double RADIO = 60.0;
 
     // ---- Equipos ----
-    public static final String NOMBRE_EQUIPO_A = "★";
-    public static final String NOMBRE_EQUIPO_B = "▲";
+    public static final String NOMBRE_EQUIPO_A = "A";
+    public static final String NOMBRE_EQUIPO_B = "B";
     public static final Color COLOR_EQUIPO_A = new Color(30, 136, 229);  // azul
     public static final Color COLOR_EQUIPO_B = new Color(229, 57, 53);   // rojo
-    public static final String SIMBOLO_EQUIPO_A = "X";
-    public static final String SIMBOLO_EQUIPO_B = "M";
+    public static final String SIMBOLO_EQUIPO_A = "★";
+    public static final String SIMBOLO_EQUIPO_B = "▲";
 
     // ---- Movimiento y combate ----
     public static final double VELOCIDAD_MIN = 1.0;
