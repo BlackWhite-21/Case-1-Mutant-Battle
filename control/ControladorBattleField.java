@@ -1,6 +1,5 @@
 package control;
 
-import java.util.Scanner;
 import java.util.Set;
 import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
@@ -62,11 +61,11 @@ public class ControladorBattleField implements Runnable, IObserver {
     }
 
     private Vector<IPoderMutante> crearPoderAleatorio() {
-		IPoderMutante poderesDisponibles[] = {new PoderDefensa(), new PoderAtaque(), new PoderRecarga(), new PoderVelocidad(), new PoderVelocidad()};
+		IPoderMutante poderesDisponibles[] = {new PoderDefensa(), new PoderAtaque(), new PoderRecarga(), new PoderVelocidad(), new PoderInvisibilidad()};
 
 		Vector<IPoderMutante> poderesM = new Vector<>();
-		int cantidadPoderes = (int)(Math.random()*5);
-		for (int i = cantidadPoderes; i <= 0; i--) {
+		int cantidadPoderes = (int)(Math.random()*poderesDisponibles.length);
+		for (int i = 0; i < cantidadPoderes; i++) {
 			poderesM.add(poderesDisponibles[ThreadLocalRandom.current().nextInt(Constantes.CANTIDAD_PODERES)]);
 		}
 		return poderesM;

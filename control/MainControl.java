@@ -2,6 +2,7 @@ package control;
 
 import game.BattleField;
 import game.ConfiguracionBattleField;
+import model.IPoderMutante;
 import model.Mutante;
 import util.Constantes;
 
@@ -47,14 +48,29 @@ public class MainControl {
     }
 
     private static void imprimirEquipo(String nombre, BattleField battleField, boolean esEquipoA) {
-        System.out.println("Equipo " + nombre + ":");
-        for (Mutante m : esEquipoA ? battleField.getMutantesA() : battleField.getMutantesB()) {
-            System.out.println("  Mutante " + m.getId()
-                    + " | energía " + m.getEnergia()
-                    + " | ataque " + m.getAtaque()
-                    + " | defensa " + m.getDefensa()
-                    + " | poder " + m.getPoderMutante().getClass().getSimpleName()
-                    + (m.estaVivo() ? "" : " (muerto)"));
-        }
+		System.out.println("Equipo " + nombre + ":");
+
+		for (Mutante m : esEquipoA ? battleField.getMutantesA() : battleField.getMutantesB()) {
+
+			String poderes = "";
+
+			for (IPoderMutante poder : m.getPoderesMutantes()) {
+				poderes += poder.getClass().getSimpleName() + ", ";
+			}
+
+			// Eliminar la última coma y espacio
+			if (!poderes.isEmpty()) {
+				poderes = poderes.substring(0, poderes.length() - 2);
+			} else {
+				poderes = "Ninguno";
+			}
+
+			System.out.println("  Mutante " + m.getId()
+					+ " | energía " + m.getEnergia()
+					+ " | ataque " + m.getAtaque()
+					+ " | defensa " + m.getDefensa()
+					+ " | poderes " + poderes
+					+ (m.estaVivo() ? "" : " (muerto)"));
     }
+}
 }
