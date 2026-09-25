@@ -21,6 +21,17 @@ public class ConfigBattleField {
         this.radio = Constantes.RADIO;
     }
 
+     /** Para el juego con ventana: el usuario elige el tamaño y el campo mide lo que la pantalla. */
+    public ConfigBattleField(int tamEquipo, int ancho, int alto) {
+        if (tamEquipo < Constantes.TAM_EQUIPO_MIN || tamEquipo > Constantes.TAM_EQUIPO_MAX) {
+            throw new IllegalArgumentException("El tamaño del equipo debe estar entre "
+                    + Constantes.TAM_EQUIPO_MIN + " y " + Constantes.TAM_EQUIPO_MAX);
+        }
+        this.tamEquipo = tamEquipo;
+        this.borde = new Point(ancho, alto);
+        this.radio = Constantes.RADIO;
+    }   
+
     public Point getBorde() {
         return borde;
     }
