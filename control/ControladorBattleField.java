@@ -64,7 +64,7 @@ public class ControladorBattleField implements Runnable, IObserver {
 		IPoderMutante poderesDisponibles[] = {new PoderDefensa(), new PoderAtaque(), new PoderRecarga(), new PoderVelocidad(), new PoderInvisibilidad()};
 
 		Vector<IPoderMutante> poderesM = new Vector<>();
-		int cantidadPoderes = (int)(Math.random()*poderesDisponibles.length);
+		int cantidadPoderes = (int)(Math.random()*(poderesDisponibles.length))+1;
 		for (int i = 0; i < cantidadPoderes; i++) {
 			poderesM.add(poderesDisponibles[ThreadLocalRandom.current().nextInt(Constantes.CANTIDAD_PODERES)]);
 		}

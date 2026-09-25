@@ -39,7 +39,7 @@ public class MainModel {
 		IPoderMutante poderesDisponibles[] = {new PoderDefensa(), new PoderAtaque(), new PoderRecarga(), new PoderVelocidad(), new PoderVelocidad()};
 
 		Vector<IPoderMutante> poderesM = new Vector<>();
-		int cantidadPoderes = (int)(Math.random()*5);
+		int cantidadPoderes = (int)(Math.random()*(poderesDisponibles.length))+1;
 		for (int i = 0; i < cantidadPoderes; i++){
 			poderesM.add(poderesDisponibles[ThreadLocalRandom.current().nextInt(Constantes.CANTIDAD_PODERES)]);
 		};

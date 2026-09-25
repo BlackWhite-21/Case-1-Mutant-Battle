@@ -18,7 +18,7 @@ public class Mutante extends Observable{
 	
     public Mutante(int pId, int pDefensa, int pAtaque, double pVelocidad, Point pCoordenada, Vector<IPoderMutante> pPoderesAleatorios) {
 		this.id = pId;
-        this.energia = 0;
+        this.energia = 100;
         this.defensa = pDefensa;
         this.ataque = pAtaque;
         this.velocidad = 1;
@@ -79,7 +79,7 @@ public class Mutante extends Observable{
 	}
 
     public boolean usarPoderMutante() {
-		IPoderMutante poderUsar = this.poderesMutantes.get((int)(Math.random()*4));
+		IPoderMutante poderUsar = this.poderesMutantes.get((int)(Math.random()*(this.poderesMutantes.size())));
 		return poderUsar.ActivarPoder(this);
     }
 
