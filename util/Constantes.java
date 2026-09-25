@@ -56,7 +56,8 @@ public final class Constantes {
     public static final String TITULO_VENTANA = "Mutant Battle";
     public static final String TEXTO_BOTON_NUEVA_BATALLA = "Nueva batalla";
     public static int TAM_FUENTE_MARCADOR;
-    public static int TAM_FUENTE_MARCADOR;
+    public static int ALTO_BARRA_ENERGIA;
+    public static Color COLOR_ENERGIA;
 
     private Constantes() {
         // No se instancia
