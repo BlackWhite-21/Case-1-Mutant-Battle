@@ -10,14 +10,21 @@ public abstract class Observable {
     private final Vector<IObserver> observers = new Vector<>();
 
     public void addObserver(IObserver ob) {
-        // TODO: agregar el observador a la lista (evitar duplicados)
+        if (ob != null && !observers.contains(ob)) {
+            observers.add(ob);
+        }
     }
 
     public void removeObserver(IObserver ob) {
-        // TODO: quitar el observador de la lista
+        observers.remove(ob);
     }
 
     public void notifyObservers(Object source) {
-        // TODO: recorrer la lista y llamar ob.update(source, this) en cada uno
+        // Se recorre una copia para que, si alguien se agrega o se quita
+        // mientras se notifica (desde otro hilo), no se rompa el recorrido.
+        Vector<IObserver> copia = new Vector<>(observers);
+        for (IObserver ob : copia) {
+            ob.update(source, this);
+        }
     }
 }

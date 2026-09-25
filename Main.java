@@ -15,8 +15,9 @@ public class Main {
             BattleController controller = new BattleController();
             Interfase interfase = new Interfase(controller);
             controller.setInterfase(interfase);
-            // TODO: interfase.setVisible(true);
-            //       controller.iniciarBatalla(interfase.pedirTamEquipo());
+
+            interfase.setVisible(true);
+            controller.iniciarBatalla(interfase.pedirTamEquipo());
         });
     }
 }
