@@ -1,9 +1,9 @@
 package control;
 
-import mutantbattle.game.BattleField;
-import mutantbattle.game.ConfiguracionBattleField;
-import mutantbattle.model.Mutante;
-import mutantbattle.util.Constantes;
+import game.BattleField;
+import game.ConfiguracionBattleField;
+import model.Mutante;
+import util.Constantes;
 
 /**
  * Prueba de la Control Layer por sí sola (batalla en consola, sin UI).

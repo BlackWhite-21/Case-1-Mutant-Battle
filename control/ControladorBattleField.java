@@ -16,9 +16,9 @@ import model.PoderInvisibilidad;
 import model.IPoderMutante;
 import model.PoderVelocidad;
 
-import utils.Constantes;
-import utils.IObserver;
-import utils.Observable;
+import util.Constantes;
+import util.IObserver;
+import util.Observable;
 
 /**
  * Funcionalidad del BattleField. Implementa Runnable (ciclo principal)
