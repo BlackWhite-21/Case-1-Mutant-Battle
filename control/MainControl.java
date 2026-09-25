@@ -1,9 +1,9 @@
 package control;
 
-import mutantbattle.game.BattleField;
-import mutantbattle.game.ConfiguracionBattleField;
-import mutantbattle.model.Mutante;
-import mutantbattle.util.Constantes;
+import game.BattleField;
+import game.ConfiguracionBattleField;
+import model.Mutante;
+import util.Constantes;
 
 /**
  * Prueba de la Control Layer por sí sola (batalla en consola, sin UI).
@@ -15,12 +15,13 @@ public class MainControl {
 
     public static void main(String[] args) throws InterruptedException {
         // 1. Armar el campo y el controlador
-        ConfiguracionBattleField config = new ConfiguracionBattleField(TAM_EQUIPO_PRUEBA);
+        ConfiguracionBattleField config = new ConfiguracionBattleField();
         BattleField battleField = new BattleField(config);
         ControladorBattleField controlador = new ControladorBattleField(battleField);
 
         // 2. Crear los equipos y mostrar cómo empiezan
         controlador.crearEquipos(TAM_EQUIPO_PRUEBA);
+
         System.out.println("=== Equipos iniciales ===");
         imprimirEquipo(Constantes.NOMBRE_EQUIPO_A, battleField, true);
         imprimirEquipo(Constantes.NOMBRE_EQUIPO_B, battleField, false);

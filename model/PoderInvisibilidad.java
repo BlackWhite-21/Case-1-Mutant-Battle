@@ -6,7 +6,12 @@ public class PoderInvisibilidad implements IPoderMutante{
     }
 
     @Override 
-    public void DispararPoder(Mutante mutante_n){
-        mutante_n.changeVisibilidad();
-    }
+    public boolean ActivarPoder(Mutante mutante_n){
+		if (mutante_n.getVisibilidad()) {
+			mutante_n.changeVisibilidad();
+			return true;
+		}
+		return false;
+	}
+
 }

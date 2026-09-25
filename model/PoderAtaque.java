@@ -5,7 +5,11 @@ public class PoderAtaque implements IPoderMutante{
     }
 
     @Override 
-    public void DispararPoder(Mutante mutante_n){
-        mutante_n.addAtaque(1);
+    public boolean ActivarPoder(Mutante mutante_n){
+		if (mutante_n.getAtaque() + 1 <= 3) {
+			mutante_n.addAtaque(1);
+			return true;
+		}
+		return false;
     }
 }
