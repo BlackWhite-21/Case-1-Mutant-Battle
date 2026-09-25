@@ -4,19 +4,21 @@ import java.util.Set;
 import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ThreadLocalRandom;
+import java.awt.*;
 
 import game.BattleField;
-import utils.Cordenada;
-import util.Constantes;
 import model.Mutante;
+
 import model.PoderAtaque;
-import model.PoderCura;
+import model.PoderRecarga;
 import model.PoderDefensa;
 import model.PoderInvisibilidad;
-import model.PoderMutante;
+import model.IPoderMutante;
 import model.PoderVelocidad;
-import observer.IObserver;
-import observer.Observable;
+
+import utils.Constantes;
+import utils.IObserver;
+import utils.Observable;
 
 /**
  * Funcionalidad del BattleField. Implementa Runnable (ciclo principal)
@@ -48,29 +50,24 @@ public class ControladorBattleField implements Runnable, IObserver {
 
     private Mutante crearMutanteAleatorio() {
         ThreadLocalRandom random = ThreadLocalRandom.current();
-        Cordenada borde = battleField.getConfig().getBorde();
+        Point borde = battleField.getConfig().getBorde();
 
         int defensa = random.nextInt(Constantes.DEFENSA_MIN, Constantes.DEFENSA_MAX + 1);
         int ataque = random.nextInt(Constantes.DANIO_MIN, Constantes.DANIO_INICIAL_MAX + 1);
         float velocidad = (float) random.nextDouble(Constantes.VELOCIDAD_MIN, Constantes.VELOCIDAD_MAX);
-        Cordenada posicion = new Cordenada(random.nextInt(borde.getX()), random.nextInt(borde.getY()));
+        Point posicion = new Point(random.nextInt((int)(borde.getX())), random.nextInt((int)(borde.getY())));
 
         return new Mutante(defensa, ataque, velocidad, posicion, crearPoderAleatorio());
     }
 
-    private PoderMutante crearPoderAleatorio() {
-        switch (ThreadLocalRandom.current().nextInt(Constantes.CANTIDAD_PODERES)) {
-            case 0:
-                return new PoderDefensa();
-            case 1:
-                return new PoderAtaque();
-            case 2:
-                return new PoderInvisibilidad();
-            case 3:
-                return new PoderVelocidad();
-            default:
-                return new PoderCura();
-        }
+    private Vector<IPoderMutante> crearPoderAleatorio() {
+		IPoderMutante poderesDisponibles[] = {new PoderDefensa(), new PoderAtaque(), new PoderRecarga(), new PoderVelocidad(), new PoderVelocidad()};
+		Vector<IPoderMutante> poderesMutantes;
+		int cantidadPoderes = (int)(Math.random()*5);
+		for (int i = cantidadPoderes; i <= 0; i--) {
+			poderesMutantes.add(poderesDisponibles[ThreadLocalRandom.current().nextInt(Constantes.CANTIDAD_PODERES)]);
+		}
+		return poderesMutantes;
     }
 
     // ---------------- Hilos ----------------
@@ -126,7 +123,7 @@ public class ControladorBattleField implements Runnable, IObserver {
                 continue;
             }
             String par = clavePar(mutante, enemigo);
-            double distancia = mutante.getCordenadas().distancia(enemigo.getCordenadas());
+            double distancia = mutante.getPoints().distancia(enemigo.getPoints());
 
             if (distancia <= radio) {
                 // add() es atómico: solo el primer hilo que registra el par resuelve el encuentro
