@@ -3,22 +3,21 @@ package model;
 import java.util.Vector;
 import java.awt.Point;
 
-import model.IPoderMutante;
-
 import util.Observable;
 
 
 public class Mutante extends Observable{
+	private int id;
     private int energia;
     private int defensa;
     private int ataque;
     private double velocidad;
     private boolean visibilidad;
     private Point Coordenada;
-	private 
     private Vector<IPoderMutante> poderesMutantes;
 	
-    public Mutante(int pDefensa, int pAtaque, double pVelocidad, Point pCoordenada, Vector<IPoderMutante> pPoderesAleatorios) {
+    public Mutante(int pId, int pDefensa, int pAtaque, double pVelocidad, Point pCoordenada, Vector<IPoderMutante> pPoderesAleatorios) {
+		this.id = pId;
         this.energia = 0;
         this.defensa = pDefensa;
         this.ataque = pAtaque;
@@ -29,16 +28,8 @@ public class Mutante extends Observable{
 		this.poderesMutantes = pPoderesAleatorios;
     }
 
-    private void mover(Point nPosition) {
-        Coordenada = nPosition;
-    }
-
-    public void atacar(Mutante mutante) {
-		
-    }
-
-	public void defenderse(Mutante mutante) {
-		
+    public void mover(Point nPosition) {
+        this.Coordenada.setLocation(nPosition);
     }
 
 	public Point getPos(){
@@ -46,7 +37,7 @@ public class Mutante extends Observable{
 	}
 
     public void addEnergia(int valor) {
-		if (this.energia + 15 <=100) {
+		if ((valor < 0) || (valor > 0 && this.energia + valor <=100)) {
 			this.energia += valor;
 		}
     }
@@ -55,16 +46,16 @@ public class Mutante extends Observable{
 	}
 
 	public void addAtaque(int valor) {
-		if (this.ataque + 1 <=3) {
+		if ((valor < 0 && this.ataque + valor > 0) || (valor > 0 && this.ataque + valor <= 3)) {
 			this.ataque += valor;
-		}
+		} 
     }
 	public int getAtaque(){
 		return this.ataque;
 	}
 
 	public void addDefensa(int valor) {
-		if (this.defensa + 1 <=3) {
+		if ((valor < 0 && this.defensa + valor > 0) || (valor > 0 && this.ataque + valor <= 3)) {
 			this.defensa += valor;
 		}
     }
@@ -73,7 +64,6 @@ public class Mutante extends Observable{
 	}
 
 	public void setVelocidad(double valor) {
-
 		this.velocidad = valor;
     }
 	public double getVelocidad(){
@@ -93,4 +83,13 @@ public class Mutante extends Observable{
 		return poderUsar.ActivarPoder(this);
 		
     }
+
+	public boolean estaVivo(){
+		return this.energia > 0;
+	}
+
+	public int getId(){
+		return this.id;
+	}
+
 }
