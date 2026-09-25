@@ -1,4 +1,4 @@
-package utils;
+package util;
 
 /**
  * Contrato que debe cumplir todo objeto que quiera ser notificado
