@@ -11,15 +11,15 @@ public class MutanteThread extends Thread {
 
     private final Mutante mutante;
     private final ConfiguracionBattleField config;
-	private final int cooldownTicks;
     private volatile boolean activo = true;
     private double dirX;
     private double dirY;
+	private int cooldownTicks;
 
     public MutanteThread(Mutante mutante, ConfiguracionBattleField config) {
         this.mutante = mutante;
         this.config = config;
-		this.cooldownTicks = 350;
+		this.cooldownTicks = 0;
         double angulo = ThreadLocalRandom.current().nextDouble(2 * Math.PI);
         this.dirX = Math.cos(angulo);
         this.dirY = Math.sin(angulo);
@@ -29,6 +29,10 @@ public class MutanteThread extends Thread {
     public void run() {
         while (activo && mutante.estaVivo()) {
             mover();
+			++ this.cooldownTicks;
+			if (this.cooldownTicks <= 0){
+				this.cooldownTicks = Constantes.COOLDOWN_TICKS;
+			}
             try {
                 Thread.sleep(Constantes.TICK_MOVIMIENTO_MS);
             } catch (InterruptedException e) {
@@ -53,7 +57,7 @@ public class MutanteThread extends Thread {
             dirY = -dirY;
             y = Math.max(0, Math.min(y, borde.getY()));
         }
-        mutante.moverse(new Point((int) Math.round(x), (int) Math.round(y)));
+        mutante.mover(new Point((int) Math.round(x), (int) Math.round(y)));
     }
 
     public void detener() {
