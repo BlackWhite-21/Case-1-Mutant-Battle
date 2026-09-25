@@ -1,5 +1,5 @@
 package model;
 
 public interface IPoderMutante {
-    public void DispararPoder(Mutante a);
+    public boolean ActivarPoder(Mutante a);
 }

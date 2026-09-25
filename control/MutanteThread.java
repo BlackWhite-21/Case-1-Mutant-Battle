@@ -1,16 +1,17 @@
 package control;
 
 import java.util.concurrent.ThreadLocalRandom;
+import java.awt.*;
 
-import mutantbattle.game.ConfiguracionBattleField;
-import mutantbattle.model.Cordenada;
-import mutantbattle.model.Mutante;
-import mutantbattle.util.Constantes;
+import game.ConfiguracionBattleField;
+import model.Mutante;
+import util.Constantes;
 
 public class MutanteThread extends Thread {
 
     private final Mutante mutante;
     private final ConfiguracionBattleField config;
+	private final int cooldownTicks;
     private volatile boolean activo = true;
     private double dirX;
     private double dirY;
@@ -18,6 +19,7 @@ public class MutanteThread extends Thread {
     public MutanteThread(Mutante mutante, ConfiguracionBattleField config) {
         this.mutante = mutante;
         this.config = config;
+		this.cooldownTicks = 0;
         double angulo = ThreadLocalRandom.current().nextDouble(2 * Math.PI);
         this.dirX = Math.cos(angulo);
         this.dirY = Math.sin(angulo);
@@ -36,8 +38,8 @@ public class MutanteThread extends Thread {
     }
 
     private void mover() {
-        Cordenada actual = mutante.getCordenadas();
-        Cordenada borde = config.getBorde();
+        Point actual = mutante.getPos();
+        Point borde = config.getBorde();
         double paso = mutante.getVelocidad() * Constantes.PASO_MOVIMIENTO;
 
         double x = actual.getX() + dirX * paso;
@@ -51,7 +53,7 @@ public class MutanteThread extends Thread {
             dirY = -dirY;
             y = Math.max(0, Math.min(y, borde.getY()));
         }
-        mutante.moverse(new Cordenada((int) Math.round(x), (int) Math.round(y)));
+        mutante.mover(new Point((int) Math.round(x), (int) Math.round(y)));
     }
 
     public void detener() {

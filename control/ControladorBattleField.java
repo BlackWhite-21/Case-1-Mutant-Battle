@@ -1,22 +1,25 @@
 package control;
 
+import java.util.Scanner;
 import java.util.Set;
 import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ThreadLocalRandom;
+import java.awt.Point;
 
 import game.BattleField;
-import utils.Cordenada;
-import util.Constantes;
 import model.Mutante;
+
+import model.IPoderMutante;
 import model.PoderAtaque;
-import model.PoderCura;
+import model.PoderRecarga;
 import model.PoderDefensa;
-import model.PoderInvisibilidad;
-import model.PoderMutante;
 import model.PoderVelocidad;
-import observer.IObserver;
-import observer.Observable;
+import model.PoderInvisibilidad;
+
+import util.Constantes;
+import util.IObserver;
+import util.Observable;
 
 /**
  * Funcionalidad del BattleField. Implementa Runnable (ciclo principal)
@@ -37,8 +40,8 @@ public class ControladorBattleField implements Runnable, IObserver {
 
     public void crearEquipos(int tamEquipo) {
         for (int i = 0; i < tamEquipo; i++) {
-            Mutante a = crearMutanteAleatorio();
-            Mutante b = crearMutanteAleatorio();
+            Mutante a = crearMutanteAleatorio(i);
+            Mutante b = crearMutanteAleatorio(i+1);
             a.addObserver(this);
             b.addObserver(this);
             battleField.agregarMutanteA(a);
@@ -46,31 +49,27 @@ public class ControladorBattleField implements Runnable, IObserver {
         }
     }
 
-    private Mutante crearMutanteAleatorio() {
+    private Mutante crearMutanteAleatorio(int id) {
         ThreadLocalRandom random = ThreadLocalRandom.current();
-        Cordenada borde = battleField.getConfig().getBorde();
+        Point borde = battleField.getConfig().getBorde();
 
         int defensa = random.nextInt(Constantes.DEFENSA_MIN, Constantes.DEFENSA_MAX + 1);
         int ataque = random.nextInt(Constantes.DANIO_MIN, Constantes.DANIO_INICIAL_MAX + 1);
         float velocidad = (float) random.nextDouble(Constantes.VELOCIDAD_MIN, Constantes.VELOCIDAD_MAX);
-        Cordenada posicion = new Cordenada(random.nextInt(borde.getX()), random.nextInt(borde.getY()));
+        Point posicion = new Point(random.nextInt((int)(borde.getX())), random.nextInt((int)(borde.getY())));
 
-        return new Mutante(defensa, ataque, velocidad, posicion, crearPoderAleatorio());
+        return new Mutante(id, defensa, ataque, velocidad, posicion, crearPoderAleatorio());
     }
 
-    private PoderMutante crearPoderAleatorio() {
-        switch (ThreadLocalRandom.current().nextInt(Constantes.CANTIDAD_PODERES)) {
-            case 0:
-                return new PoderDefensa();
-            case 1:
-                return new PoderAtaque();
-            case 2:
-                return new PoderInvisibilidad();
-            case 3:
-                return new PoderVelocidad();
-            default:
-                return new PoderCura();
-        }
+    private Vector<IPoderMutante> crearPoderAleatorio() {
+		IPoderMutante poderesDisponibles[] = {new PoderDefensa(), new PoderAtaque(), new PoderRecarga(), new PoderVelocidad(), new PoderVelocidad()};
+
+		Vector<IPoderMutante> poderesM = new Vector<>();
+		int cantidadPoderes = (int)(Math.random()*5);
+		for (int i = cantidadPoderes; i <= 0; i--) {
+			poderesM.add(poderesDisponibles[ThreadLocalRandom.current().nextInt(Constantes.CANTIDAD_PODERES)]);
+		}
+		return poderesM;
     }
 
     // ---------------- Hilos ----------------
@@ -126,7 +125,7 @@ public class ControladorBattleField implements Runnable, IObserver {
                 continue;
             }
             String par = clavePar(mutante, enemigo);
-            double distancia = mutante.getCordenadas().distancia(enemigo.getCordenadas());
+            double distancia = mutante.getPos().distance(enemigo.getPos());
 
             if (distancia <= radio) {
                 // add() es atómico: solo el primer hilo que registra el par resuelve el encuentro
@@ -165,12 +164,12 @@ public class ControladorBattleField implements Runnable, IObserver {
     }
 
     private void aplicarAtaque(Mutante atacante, Mutante objetivo, boolean objetivoDefiende) {
-        int danio = atacante.getAtaque();
+        int dAtaque = atacante.getAtaque();
         if (objetivoDefiende) {
-            danio = (int) Math.ceil((double) danio / objetivo.getDefensa());
+            dAtaque = (int) Math.ceil((double) dAtaque / objetivo.getDefensa());
         }
-        if (danio > 0) {
-            objetivo.addEnergia(-danio);
+        if (dAtaque > 0) {
+            objetivo.addEnergia(-dAtaque);
             atacante.addAtaque(Constantes.INCREMENTO_DANIO); // tope en DANIO_MAX
         }
     }
