@@ -4,9 +4,9 @@ import java.util.Vector;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import model.Mutante;
-import utils.IObserver;
-import utils.Observable;
-import utils.Constantes;
+import util.IObserver;
+import util.Observable;
+import util.Constantes;
 
 /**
  * Estado del BattleField: los dos equipos.
