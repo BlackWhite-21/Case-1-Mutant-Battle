@@ -3,7 +3,7 @@ package game;
 import java.util.Vector;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import mutantbattle.model.Mutante;
+import model.Mutante;
 import utils.IObserver;
 import utils.Observable;
 import utils.Constantes;
