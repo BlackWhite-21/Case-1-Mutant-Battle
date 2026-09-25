@@ -1,39 +1,32 @@
 package model;
  
 import java.util.Vector;
-import java.awt.*;
+import java.awt.Point;
 
 import model.IPoderMutante;
-import model.PoderAtaque;
-import model.PoderDefensa;
+
+import util.Observable;
 
 
-public class Mutante {
+public class Mutante extends Observable{
     private int energia;
     private int defensa;
     private int ataque;
-    private int cooldownTime;
     private double velocidad;
     private boolean visibilidad;
     private Point Coordenada;
+	private 
     private Vector<IPoderMutante> poderesMutantes;
-
-    public Mutante(Point pCoordenada) {
+	
+    public Mutante(int pDefensa, int pAtaque, double pVelocidad, Point pCoordenada, Vector<IPoderMutante> pPoderesAleatorios) {
         this.energia = 0;
-        this.defensa = 0;
-        this.ataque = 0;
-        this.cooldownTime = 0;
+        this.defensa = pDefensa;
+        this.ataque = pAtaque;
         this.velocidad = 1;
         this.visibilidad = true;
         this.Coordenada = pCoordenada;
 		
-		this.poderesMutantes = new Vector<IPoderMutante>();
-
-		IPoderMutante poderesDisponibles[] = {new PoderDefensa(), new PoderAtaque(), new PoderRecarga(), new PoderVelocidad(), new PoderVelocidad()};
-		int cantidadPoderes = (int)(Math.random()*5);
-		for (int i = cantidadPoderes; i <= 0; i--) {
-			this.poderesMutantes.add(poderesDisponibles[(int)(Math.random()*4)]);
-		}
+		this.poderesMutantes = pPoderesAleatorios;
     }
 
     private void mover(Point nPosition) {
@@ -43,33 +36,61 @@ public class Mutante {
     public void atacar(Mutante mutante) {
 		
     }
+
 	public void defenderse(Mutante mutante) {
 		
     }
 
+	public Point getPos(){
+		return this.Coordenada;
+	}
+
     public void addEnergia(int valor) {
-		this.energia += valor;
+		if (this.energia + 15 <=100) {
+			this.energia += valor;
+		}
     }
+	public int getEnergia(){
+		return this.energia;
+	}
 
 	public void addAtaque(int valor) {
-		this.ataque += valor;
+		if (this.ataque + 1 <=3) {
+			this.ataque += valor;
+		}
     }
+	public int getAtaque(){
+		return this.ataque;
+	}
 
 	public void addDefensa(int valor) {
-		this.defensa += valor;
+		if (this.defensa + 1 <=3) {
+			this.defensa += valor;
+		}
     }
+	public int getDefensa(){
+		return this.defensa;
+	}
 
 	public void setVelocidad(double valor) {
+
 		this.velocidad = valor;
     }
+	public double getVelocidad(){
+		return this.velocidad;
+	}
 
 	public void changeVisibilidad() {
 		this.visibilidad = !(this.visibilidad);
     }
 
-    public void usarPoderMutante() {
+	public boolean getVisibilidad(){
+		return this.visibilidad;
+	}
+
+    public boolean usarPoderMutante() {
 		IPoderMutante poderUsar = this.poderesMutantes.get((int)(Math.random()*4));
-		poderUsar.ActivarPoder(this);
+		return poderUsar.ActivarPoder(this);
 		
     }
 }

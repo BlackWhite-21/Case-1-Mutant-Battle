@@ -5,7 +5,11 @@ public class PoderRecarga implements IPoderMutante{
     }
 
     @Override 
-    public void ActivarPoder(Mutante mutante_n){
-		mutante_n.addEnergia(0);
+    public boolean ActivarPoder(Mutante mutante_n){
+		if (mutante_n.getEnergia() + 15 <= 100) {
+			mutante_n.addDefensa(15);
+			return true;
+		}
+		return false;
     }
 }
