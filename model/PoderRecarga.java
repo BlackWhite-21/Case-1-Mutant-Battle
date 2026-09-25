@@ -6,6 +6,6 @@ public class PoderRecarga implements IPoderMutante{
 
     @Override 
     public void DispararPoder(Mutante mutante_n){
-        
+		mutante_n.addEnergia(0);
     }
 }
