@@ -9,13 +9,13 @@ import java.awt.Point;
 import util.Constantes;
 
 import game.BattleField;
-import game.ConfiguracionBattleField;
+import game.ConfigBattleField;
 
 public class MainModel {
 	public static void main(String[] args) {
 
 		Random random = new Random();
-		ConfiguracionBattleField configuracionBattleField = new ConfiguracionBattleField();
+		ConfigBattleField configuracionBattleField = new ConfigBattleField();
 		BattleField battleField = new BattleField(configuracionBattleField);
 
 		// Pruebas 

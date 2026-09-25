@@ -1,7 +1,7 @@
 package control;
 
 import game.BattleField;
-import game.ConfiguracionBattleField;
+import game.ConfigBattleField;
 import model.IPoderMutante;
 import model.Mutante;
 import util.Constantes;
@@ -11,17 +11,16 @@ import util.Constantes;
  */
 public class MainControl {
 
-    private static final int TAM_EQUIPO_PRUEBA = 5;
-    private static final long INTERVALO_MARCADOR_MS = 2000;
+    private static final long INTERVALO_MARCADOR_MS = 200;
 
     public static void main(String[] args) throws InterruptedException {
         // 1. Armar el campo y el controlador
-        ConfiguracionBattleField config = new ConfiguracionBattleField();
+        ConfigBattleField config = new ConfigBattleField();
         BattleField battleField = new BattleField(config);
         ControladorBattleField controlador = new ControladorBattleField(battleField);
 
         // 2. Crear los equipos y mostrar cómo empiezan
-        controlador.crearEquipos(TAM_EQUIPO_PRUEBA);
+        controlador.crearEquipos(config.getTamEquipo());
 
         System.out.println("=== Equipos iniciales ===");
         imprimirEquipo(Constantes.NOMBRE_EQUIPO_A, battleField, true);

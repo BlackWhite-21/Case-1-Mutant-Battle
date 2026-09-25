@@ -22,7 +22,7 @@ public class MainGame {
 
     public static void main(String[] args) {
         // 1. Configuración (características del campo)
-        ConfiguracionBattleField config = new ConfiguracionBattleField();
+        ConfigBattleField config = new ConfigBattleField();
         System.out.println("Tamaño de equipo: " + config.getTamEquipo());
         System.out.println("Borde: " + config.getBorde().getX() + " x " + config.getBorde().getY());
         System.out.println("Radio: " + config.getRadio());
@@ -52,8 +52,8 @@ public class MainGame {
 
 	private static Mutante crearMutanteAleatorio(int id) {
         Random random = new Random();
-		ConfiguracionBattleField configuracionBattleField = new ConfiguracionBattleField();
-		BattleField battleField = new BattleField(configuracionBattleField);
+		ConfigBattleField configBattleField = new ConfigBattleField();
+		BattleField battleField = new BattleField(configBattleField);
 
 
         Point borde = battleField.getConfig().getBorde();

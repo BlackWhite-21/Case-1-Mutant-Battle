@@ -6,15 +6,15 @@ import java.util.Random;
 import util.Constantes;
 
 /**
- * ConfiguracionBattleField solo guarda datos y los valida. No mueve mutantes ni decide combates.
+ * ConfigBattleField solo guarda datos y los valida. No mueve mutantes ni decide combates.
  */
-public class ConfiguracionBattleField {
+public class ConfigBattleField {
 	
     private final Point borde;
     private final int tamEquipo;
     private final double radio;
 
-    public ConfiguracionBattleField() {
+    public ConfigBattleField() {
 		Random random = new Random();
         this.tamEquipo = random.nextInt(Constantes.TAM_EQUIPO_MIN, Constantes.TAM_EQUIPO_MAX + 1);
         this.borde = new Point(Constantes.BORDE_X, Constantes.BORDE_Y);

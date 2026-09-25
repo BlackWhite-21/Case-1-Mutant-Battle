@@ -74,7 +74,7 @@ PoderCura
 
 
 ## Gamer Layer
-ConfiguracionBattleField (características)
+ConfigBattleField (características)
 * borde Cordenada
 * tamEquipo int
 * radio double

@@ -50,7 +50,7 @@ public final class Constantes {
     public static final String EVENTO_FIN = "FIN";
 
     // ---- Hilos y UI ----
-    public static final long TICK_MOVIMIENTO_MS = 20;
+    public static final long TICK_MOVIMIENTO_MS = 1;
 	public static final int COOLDOWN_TICKS = 165;
     public static final long REFRESCO_UI_MS = 33;   // ~30 cuadros por segundo
     public static final String TITULO_VENTANA = "Mutant Battle";

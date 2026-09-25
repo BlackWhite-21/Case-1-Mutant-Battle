@@ -3,20 +3,20 @@ package control;
 import java.util.concurrent.ThreadLocalRandom;
 import java.awt.*;
 
-import game.ConfiguracionBattleField;
+import game.ConfigBattleField;
 import model.Mutante;
 import util.Constantes;
 
 public class MutanteThread extends Thread {
 
     private final Mutante mutante;
-    private final ConfiguracionBattleField config;
+    private final ConfigBattleField config;
     private volatile boolean activo = true;
     private double dirX;
     private double dirY;
 	private int cooldownTicks;
 
-    public MutanteThread(Mutante mutante, ConfiguracionBattleField config) {
+    public MutanteThread(Mutante mutante, ConfigBattleField config) {
         this.mutante = mutante;
         this.config = config;
 		this.cooldownTicks = 0;
@@ -32,6 +32,7 @@ public class MutanteThread extends Thread {
 			++ this.cooldownTicks;
 			if (this.cooldownTicks <= 0){
 				this.cooldownTicks = Constantes.COOLDOWN_TICKS;
+				//mutante.usarPoderMutante();
 			}
             try {
                 Thread.sleep(Constantes.TICK_MOVIMIENTO_MS);

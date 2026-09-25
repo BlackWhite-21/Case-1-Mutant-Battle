@@ -14,12 +14,12 @@ import util.Constantes;
  */
 public class BattleField extends Observable implements IObserver {
 
-    private final ConfiguracionBattleField config;
+    private final ConfigBattleField config;
     private final Vector<Mutante> mutantesA = new Vector<>();
     private final Vector<Mutante> mutantesB = new Vector<>();
     private final AtomicBoolean terminado = new AtomicBoolean(false);
 
-    public BattleField(ConfiguracionBattleField config) {
+    public BattleField(ConfigBattleField config) {
         this.config = config;
     }
 
@@ -90,7 +90,7 @@ public class BattleField extends Observable implements IObserver {
 
     // ---- Getters ----
 
-    public ConfiguracionBattleField getConfig() {
+    public ConfigBattleField getConfig() {
         return config;
     }
 
