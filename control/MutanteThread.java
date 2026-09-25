@@ -11,10 +11,10 @@ public class MutanteThread extends Thread {
 
     private final Mutante mutante;
     private final ConfiguracionBattleField config;
-	private final int cooldownTicks;
     private volatile boolean activo = true;
     private double dirX;
     private double dirY;
+	private int cooldownTicks;
 
     public MutanteThread(Mutante mutante, ConfiguracionBattleField config) {
         this.mutante = mutante;
@@ -29,6 +29,10 @@ public class MutanteThread extends Thread {
     public void run() {
         while (activo && mutante.estaVivo()) {
             mover();
+			++ this.cooldownTicks;
+			if (this.cooldownTicks <= 0){
+				this.cooldownTicks = Constantes.COOLDOWN_TICKS;
+			}
             try {
                 Thread.sleep(Constantes.TICK_MOVIMIENTO_MS);
             } catch (InterruptedException e) {
