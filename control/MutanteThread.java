@@ -19,7 +19,7 @@ public class MutanteThread extends Thread {
     public MutanteThread(Mutante mutante, ConfiguracionBattleField config) {
         this.mutante = mutante;
         this.config = config;
-		this.cooldownTicks = 350;
+		this.cooldownTicks = 0;
         double angulo = ThreadLocalRandom.current().nextDouble(2 * Math.PI);
         this.dirX = Math.cos(angulo);
         this.dirY = Math.sin(angulo);

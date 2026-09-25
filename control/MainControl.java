@@ -15,7 +15,7 @@ public class MainControl {
 
     public static void main(String[] args) throws InterruptedException {
         // 1. Armar el campo y el controlador
-        ConfiguracionBattleField config = new ConfiguracionBattleField(TAM_EQUIPO_PRUEBA);
+        ConfiguracionBattleField config = new ConfiguracionBattleField();
         BattleField battleField = new BattleField(config);
         ControladorBattleField controlador = new ControladorBattleField(battleField);
 

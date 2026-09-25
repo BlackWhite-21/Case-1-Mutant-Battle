@@ -10,12 +10,12 @@ import java.awt.Point;
 import game.BattleField;
 import model.Mutante;
 
+import model.IPoderMutante;
 import model.PoderAtaque;
 import model.PoderRecarga;
 import model.PoderDefensa;
-import model.PoderInvisibilidad;
-import model.IPoderMutante;
 import model.PoderVelocidad;
+import model.PoderInvisibilidad;
 
 import util.Constantes;
 import util.IObserver;
@@ -40,8 +40,8 @@ public class ControladorBattleField implements Runnable, IObserver {
 
     public void crearEquipos(int tamEquipo) {
         for (int i = 0; i < tamEquipo; i++) {
-            Mutante a = crearMutanteAleatorio();
-            Mutante b = crearMutanteAleatorio();
+            Mutante a = crearMutanteAleatorio(i);
+            Mutante b = crearMutanteAleatorio(i+1);
             a.addObserver(this);
             b.addObserver(this);
             battleField.agregarMutanteA(a);
@@ -49,7 +49,7 @@ public class ControladorBattleField implements Runnable, IObserver {
         }
     }
 
-    private Mutante crearMutanteAleatorio() {
+    private Mutante crearMutanteAleatorio(int id) {
         ThreadLocalRandom random = ThreadLocalRandom.current();
         Point borde = battleField.getConfig().getBorde();
 
@@ -58,7 +58,7 @@ public class ControladorBattleField implements Runnable, IObserver {
         float velocidad = (float) random.nextDouble(Constantes.VELOCIDAD_MIN, Constantes.VELOCIDAD_MAX);
         Point posicion = new Point(random.nextInt((int)(borde.getX())), random.nextInt((int)(borde.getY())));
 
-        return new Mutante(defensa, ataque, velocidad, posicion, crearPoderAleatorio());
+        return new Mutante(id, defensa, ataque, velocidad, posicion, crearPoderAleatorio());
     }
 
     private Vector<IPoderMutante> crearPoderAleatorio() {
