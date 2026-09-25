@@ -81,11 +81,14 @@ public class Mutante extends Observable{
     public boolean usarPoderMutante() {
 		IPoderMutante poderUsar = this.poderesMutantes.get((int)(Math.random()*4));
 		return poderUsar.ActivarPoder(this);
-		
     }
 
 	public boolean estaVivo(){
 		return this.energia > 0;
+	}
+	
+	public Vector<IPoderMutante> getPoderesMutantes(){
+		return this.poderesMutantes;
 	}
 
 	public int getId(){
