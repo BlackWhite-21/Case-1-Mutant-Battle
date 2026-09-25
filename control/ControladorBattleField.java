@@ -138,7 +138,7 @@ public class ControladorBattleField implements Runnable, IObserver {
         }
     }
 
-    private void resolverEncuentro(Mutante primero, Mutante segundo) {
+    private void resolverEncuentro(Mutante a, Mutante b) {
         // Siempre se bloquea primero al de menor id para evitar deadlocks
         Mutante primero = a.getId() < b.getId() ? a : b;
         Mutante segundo = (primero == a) ? b : a;
