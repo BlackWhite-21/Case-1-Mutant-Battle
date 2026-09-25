@@ -6,7 +6,6 @@ import model.IPoderMutante;
 import utils.Cordenada;
 
 public class Mutante {
-
     private int energia;
     private int defensa;
     private int ataque;
@@ -35,7 +34,7 @@ public class Mutante {
     }
 
     public void moverse(Cordenada posicion) {
-
+		
     }
 
     public void atacar(Mutante mutante) {
@@ -57,7 +56,11 @@ public class Mutante {
 		this.defensa += valor;
     }
 
-	public void changeVisibilidad(int valor) {
+	public void setVelocidad(int valor) {
+		this.velocidad = valor;
+    }
+
+	public void changeVisibilidad() {
 		this.visibilidad = !(this.visibilidad);
     }
 
