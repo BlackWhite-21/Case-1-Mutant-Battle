@@ -55,9 +55,20 @@ public final class Constantes {
     public static final long REFRESCO_UI_MS = 33;   // ~30 cuadros por segundo
     public static final String TITULO_VENTANA = "Mutant Battle";
     public static final String TEXTO_BOTON_NUEVA_BATALLA = "Nueva batalla";
-    public static int TAM_FUENTE_MARCADOR;
-    public static int ALTO_BARRA_ENERGIA;
-    public static Color COLOR_ENERGIA;
+
+    // ---- UI: dibujo ----
+    public static final Color COLOR_FONDO = new Color(245, 245, 245);
+    public static final Color COLOR_TEXTO = Color.WHITE;
+    public static final Color COLOR_ENERGIA = new Color(67, 160, 71);
+    public static final Color COLOR_ENERGIA_FONDO = Color.DARK_GRAY;
+    public static final double PROPORCION_TAM_MUTANTE = 0.03;  // respecto al lado menor de la pantalla
+    public static final int TAM_MUTANTE_MIN = 10;
+    public static final double PROPORCION_FUENTE = 0.6;
+    public static final int ALTO_BARRA_ENERGIA = 4;
+    public static final int SEPARACION_BARRA = 3;
+    public static final int MARGEN_MARCADOR = 20;
+    public static final int TAM_FUENTE_MARCADOR = 18;
+    public static final int TAM_EQUIPO_PRUEBA = 5;
 
     private Constantes() {
         // No se instancia
