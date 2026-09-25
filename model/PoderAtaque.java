@@ -5,7 +5,7 @@ public class PoderAtaque implements IPoderMutante{
     }
 
     @Override 
-    public void DispararPoder(Mutante mutante_n){
+    public void ActivarPoder(Mutante mutante_n){
         mutante_n.addAtaque(1);
     }
 }

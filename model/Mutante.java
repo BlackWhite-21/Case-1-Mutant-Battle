@@ -1,9 +1,12 @@
 package model;
  
 import java.util.Vector;
+import java.awt.*;
 
 import model.IPoderMutante;
-import utils.Cordenada;
+import model.PoderAtaque;
+import model.PoderDefensa;
+
 
 public class Mutante {
     private int energia;
@@ -12,17 +15,17 @@ public class Mutante {
     private int cooldownTime;
     private double velocidad;
     private boolean visibilidad;
-    private Cordenada cordenadas;
+    private Point Coordenada;
     private Vector<IPoderMutante> poderesMutantes;
 
-    public Mutante() {
+    public Mutante(Point pCoordenada) {
         this.energia = 0;
         this.defensa = 0;
         this.ataque = 0;
         this.cooldownTime = 0;
         this.velocidad = 1;
         this.visibilidad = true;
-        this.cordenadas = new Cordenada();
+        this.Coordenada = pCoordenada;
 		
 		this.poderesMutantes = new Vector<IPoderMutante>();
 
@@ -33,8 +36,8 @@ public class Mutante {
 		}
     }
 
-    public void moverse(Cordenada posicion) {
-		
+    private void mover(Point nPosition) {
+        Coordenada = nPosition;
     }
 
     public void atacar(Mutante mutante) {
@@ -56,7 +59,7 @@ public class Mutante {
 		this.defensa += valor;
     }
 
-	public void setVelocidad(int valor) {
+	public void setVelocidad(double valor) {
 		this.velocidad = valor;
     }
 
@@ -66,7 +69,7 @@ public class Mutante {
 
     public void usarPoderMutante() {
 		IPoderMutante poderUsar = this.poderesMutantes.get((int)(Math.random()*4));
-		poderUsar.DispararPoder(this);
+		poderUsar.ActivarPoder(this);
 		
     }
 }

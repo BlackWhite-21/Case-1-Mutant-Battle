@@ -5,7 +5,7 @@ public class PoderVelocidad implements IPoderMutante{
     }
 
     @Override 
-    public void DispararPoder(Mutante mutante_n){
-        mutante_n.change
+    public void ActivarPoder(Mutante mutante_n){
+        mutante_n.setVelocidad(1.5);
     }
 }
