@@ -1,7 +1,6 @@
 # Caso #1 - Mutant Battle
-___
+
 ## Descripción General
-___
 El proyecto consiste en una simulación automática de batalla entre dos equipos de mutantes. El usuario únicamente especifica el tamaño de los equipos (entre 3 y 11); a partir de ese momento, el juego genera los atributos y poderes de cada participante e inicia la contienda de manera totalmente autónoma hasta que un equipo resulte ganador.
 
 La solución se encuentra estructurada en cuatro capas principales, junto con un paquete de utilidades que aloja el patrón Observer e infraestructura general:
@@ -14,7 +13,7 @@ La solución se encuentra estructurada en cuatro capas principales, junto con un
 
 ---
 ## Especificación de Objetos (Spec)
-___
+
 ### Patrón Observer y Utilidades (util)
 
 #### IObserver (Interfaz)
@@ -176,7 +175,7 @@ Ventana principal de la interfaz de usuario.
 #### PanelBattleField (Hereda de JPanel)
 Canvas visual para el renderizado del campo de batalla.
 * **Métodos:**
-  * # paintComponent(Graphics g): void — Dibuja mutantes vivos, barras de energía, símbolos de equipo y marcador.
+  * - paintComponent(Graphics g): void — Dibuja mutantes vivos, barras de energía, símbolos de equipo y marcador.
   * - dibujarEquipo(Graphics2D g2, Vector<Mutante> equipo, Color color, String simbolo, int tam): void
   * - dibujarMarcador(Graphics2D g2, BattleField bf): void
 
@@ -185,7 +184,7 @@ Puntos de entrada principales para probar la UI aislada y para la ejecución com
 
 ---
 ## Diagrama UML
-___
+
 El diagrama UML fue generado gracias a la herramienta PlantUML-Ecliplse encontrada en el repositorio [github de plantuml-eclipse](https://github.com/plantuml/plantuml-eclipse) y a un tutorial encontrado en [Youtube](https://www.youtube.com/watch?v=8BAP1O8DQcE).
 
 ```
