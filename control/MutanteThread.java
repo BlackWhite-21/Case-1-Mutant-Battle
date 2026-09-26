@@ -1,11 +1,10 @@
 package control;
 
-import java.util.concurrent.ThreadLocalRandom;
-import java.awt.*;
-
 import game.ConfigBattleField;
-import model.Mutante;
+import java.awt.*;
+import java.util.concurrent.ThreadLocalRandom;
 import model.IPoderMutante;
+import model.Mutante;
 import util.Constantes;
 
 public class MutanteThread extends Thread {
@@ -15,12 +14,13 @@ public class MutanteThread extends Thread {
     private volatile boolean activo = true;
     private double dirX;
     private double dirY;
-	private int cooldownTicks;
+    private long proximoPoder;   // cuándo puede usar el siguiente poder
+    private long finPoder;       // cuándo se acaba el poder activo
 
     public MutanteThread(Mutante mutante, ConfigBattleField config) {
         this.mutante = mutante;
         this.config = config;
-		this.cooldownTicks = 0;
+        this.proximoPoder = System.currentTimeMillis() + Constantes.COOLDOWN_PODER_MS;
         double angulo = ThreadLocalRandom.current().nextDouble(2 * Math.PI);
         this.dirX = Math.cos(angulo);
         this.dirY = Math.sin(angulo);
@@ -30,11 +30,7 @@ public class MutanteThread extends Thread {
     public void run() {
         while (activo && mutante.estaVivo()) {
             mover();
-			++ this.cooldownTicks;
-			if (this.cooldownTicks <= 0){
-				this.cooldownTicks = Constantes.COOLDOWN_TICKS;
-				//mutante.usarPoderMutante();
-			}
+            controlarPoderes();
             try {
                 Thread.sleep(Constantes.TICK_MOVIMIENTO_MS);
             } catch (InterruptedException e) {
@@ -63,7 +59,7 @@ public class MutanteThread extends Thread {
             }
             proximoPoder = ahora + Constantes.COOLDOWN_PODER_MS;
         }
-    }   
+    }
 
     private void mover() {
         Point actual = mutante.getPos();

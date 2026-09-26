@@ -1,7 +1,7 @@
 package model;
  
-import java.util.Vector;
 import java.awt.Point;
+import java.util.Vector;
 import util.Constantes;
 import util.Observable;
 
@@ -15,6 +15,7 @@ public class Mutante extends Observable{
     private boolean visibilidad;
     private Point Coordenada;
     private Vector<IPoderMutante> poderesMutantes;
+    private volatile IPoderMutante poderActivo;   // poder con efecto en curso (null si no hay)
 	
     public Mutante(int pId, int pDefensa, int pAtaque, double pVelocidad, Point pCoordenada, Vector<IPoderMutante> pPoderesAleatorios) {
 		this.id = pId;
@@ -52,7 +53,7 @@ public class Mutante extends Observable{
 	}
 
 	public void addAtaque(int valor) {
-		if ((valor < 0 && this.ataque + valor > 0) || (valor > 0 && this.ataque + valor <= 3)) {
+		if ((valor < 0 && this.ataque + valor > 0) || (valor > 0 && this.ataque + valor <= Constantes.DANIO_MAX)) {
 			this.ataque += valor;
 		} 
     }
@@ -61,7 +62,7 @@ public class Mutante extends Observable{
 	}
 
 	public void addDefensa(int valor) {
-		if ((valor < 0 && this.defensa + valor > 0) || (valor > 0 && this.ataque + valor <= 3)) {
+		if ((valor < 0 && this.defensa + valor > 0) || (valor > 0 && this.defensa + valor <= Constantes.DEFENSA_MAX)) {
 			this.defensa += valor;
 		}
     }
@@ -84,10 +85,36 @@ public class Mutante extends Observable{
 		return this.visibilidad;
 	}
 
-    public boolean usarPoderMutante() {
+    /**
+     * Activa uno de sus poderes al azar
+     * Si el poder tiene duración, queda como poder activo hasta que se llame terminarPoder().
+     * Devuelve el poder activado, o null si no se pudo activar.
+     */
+    public synchronized IPoderMutante usarPoderMutante() {
+		if (poderActivo != null || poderesMutantes.isEmpty()) {
+			return null;   // ya tiene un poder en curso
+		}
 		IPoderMutante poderUsar = this.poderesMutantes.get((int)(Math.random()*(this.poderesMutantes.size())));
-		return poderUsar.ActivarPoder(this);
+		if (!poderUsar.ActivarPoder(this)) {
+			return null;
+		}
+		if (poderUsar.getDuracionMs() > 0) {
+			this.poderActivo = poderUsar;
+		}
+		return poderUsar;
     }
+
+    /** Se acabó el tiempo del poder: se quita su efecto. */
+    public synchronized void terminarPoder() {
+		if (poderActivo != null) {
+			poderActivo.DesactivarPoder(this);
+			poderActivo = null;
+		}
+    }
+
+	public IPoderMutante getPoderActivo() {
+		return this.poderActivo;
+	}
 
 	public boolean estaVivo(){
 		return this.energia > 0;

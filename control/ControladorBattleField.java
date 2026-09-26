@@ -39,8 +39,8 @@ public class ControladorBattleField implements Runnable, IObserver {
 
     public void crearEquipos(int tamEquipo) {
         for (int i = 0; i < tamEquipo; i++) {
-            Mutante a = crearMutanteAleatorio(i);
-            Mutante b = crearMutanteAleatorio(i+1);
+            Mutante a = crearMutanteAleatorio(2 * i);      // ids pares: equipo A
+            Mutante b = crearMutanteAleatorio(2 * i + 1);  // ids impares: equipo B
             a.addObserver(this);
             b.addObserver(this);
             battleField.agregarMutanteA(a);

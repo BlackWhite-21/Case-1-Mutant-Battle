@@ -22,6 +22,12 @@ public final class Constantes {
     public static final float AUMENTO_VELOCIDAD = 1.5f;
     public static final int AUMENTO_CURA = 10;
     public static final float DURACION_PODER = 3.0f;
+    public static final int AUMENTO_RECARGA = 15;
+    public static final double VELOCIDAD_NORMAL = 1.0;
+    public static final double VELOCIDAD_AUMENTADA = 1.5;
+    public static final long DURACION_PODER_MS = 3000;   // cuánto dura un poder activo
+    public static final long COOLDOWN_PODER_MS = 2000;   // espera entre un poder y el siguiente
+    public static final long DURACION_INSTANTANEA = 0;   // poderes sin duración (ej. Recarga)
 
     // ---- BattleField ----
     public static final int TAM_EQUIPO_MIN = 3;
@@ -68,6 +74,16 @@ public final class Constantes {
     public static final int SEPARACION_BARRA = 3;
     public static final int MARGEN_MARCADOR = 20;
     public static final int TAM_FUENTE_MARCADOR = 18;
+    public static final Color COLOR_PODER_ACTIVO = new Color(255, 193, 7);   // anillo dorado
+    public static final float GROSOR_ANILLO = 3f;
+    public static final float OPACIDAD_INVISIBLE = 0.3f;
+    public static final String PREFIJO_PODER = "Poder";
+    public static final Color COLOR_PODERES = Color.DARK_GRAY;
+    public static final double PROPORCION_FUENTE_PODERES = 0.5;
+    public static final String LEYENDA_PODERES =
+            "Poderes:  A = Ataque   D = Defensa   I = Invisibilidad   R = Recarga   V = Velocidad";
+    public static final String LEYENDA_EFECTOS =
+            "Anillo dorado = poder activo   Transparente = invisible";
     public static final int TAM_EQUIPO_PRUEBA = 5;
 
     private Constantes() {
