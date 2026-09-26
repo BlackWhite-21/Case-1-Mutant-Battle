@@ -19,10 +19,6 @@ Observable <<abstract>>
   
 ## Model Layer
 
-Cordenada
-* x
-* y
-
 Mutante
 * energia int
 * defensa int
@@ -84,8 +80,6 @@ ConfigBattleField (características)
   * getRadio()
 
 BattleField  
-* borde Cordenada
-* tamEquipo int
 * mutantesA vector < Mutante >
 * mutantesB vector < Mutante >
 * Metodos:
