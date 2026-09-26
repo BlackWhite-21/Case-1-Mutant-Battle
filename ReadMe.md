@@ -461,4 +461,3 @@ class Main {
 ```
 
 
-![Diagrama UML](PlantUML.png)
