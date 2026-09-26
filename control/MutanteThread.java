@@ -5,6 +5,7 @@ import java.awt.*;
 
 import game.ConfigBattleField;
 import model.Mutante;
+import model.IPoderMutante;
 import util.Constantes;
 
 public class MutanteThread extends Thread {
@@ -41,6 +42,28 @@ public class MutanteThread extends Thread {
             }
         }
     }
+
+    /**
+     * Ciclo de los poderes: esperar el cooldown -> activar uno -> dura DURACION -> se desactiva.
+     */
+    private void controlarPoderes() {
+        long ahora = System.currentTimeMillis();
+
+        if (mutante.getPoderActivo() != null) {
+            // Hay un poder en curso: ¿ya se le acabó el tiempo?
+            if (ahora >= finPoder) {
+                mutante.terminarPoder();
+                proximoPoder = ahora + Constantes.COOLDOWN_PODER_MS;
+            }
+        } else if (ahora >= proximoPoder) {
+            // Terminó el cooldown: intenta usar un poder
+            IPoderMutante poder = mutante.usarPoderMutante();
+            if (poder != null) {
+                finPoder = ahora + poder.getDuracionMs();
+            }
+            proximoPoder = ahora + Constantes.COOLDOWN_PODER_MS;
+        }
+    }   
 
     private void mover() {
         Point actual = mutante.getPos();
