@@ -28,7 +28,7 @@ public final class Constantes {
     public static final int TAM_EQUIPO_MAX = 11;
     public static final int BORDE_X = 800;
     public static final int BORDE_Y = 600;
-    public static final double RADIO = 60.0;
+    public static final double RADIO = 90.0;
 
     // ---- Equipos ----
     public static final String NOMBRE_EQUIPO_A = "A";
@@ -50,7 +50,7 @@ public final class Constantes {
     public static final String EVENTO_FIN = "FIN";
 
     // ---- Hilos y UI ----
-    public static final long TICK_MOVIMIENTO_MS = 50;
+    public static final long TICK_MOVIMIENTO_MS = 5;
 	public static final int COOLDOWN_TICKS = 165;
     public static final long REFRESCO_UI_MS = 33;   // ~30 cuadros por segundo
     public static final String TITULO_VENTANA = "Mutant Battle";
@@ -62,7 +62,7 @@ public final class Constantes {
     public static final Color COLOR_ENERGIA = new Color(67, 160, 71);
     public static final Color COLOR_ENERGIA_FONDO = Color.DARK_GRAY;
     public static final double PROPORCION_TAM_MUTANTE = 0.03;  // respecto al lado menor de la pantalla
-    public static final int TAM_MUTANTE_MIN = 10;
+    public static final int TAM_MUTANTE_MIN = 100;
     public static final double PROPORCION_FUENTE = 0.6;
     public static final int ALTO_BARRA_ENERGIA = 4;
     public static final int SEPARACION_BARRA = 3;
